@@ -2,12 +2,13 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { navigation } from "../mocks/home";
+import "./Header.css";
 
 const Header = ({}) => (
   <Popover as="header" className="relative">
     {({ open }) => (
       <>
-        <div className="bg-gray-900 py-6">
+        <div className="header py-6">
           <nav
             className="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6"
             aria-label="Global"

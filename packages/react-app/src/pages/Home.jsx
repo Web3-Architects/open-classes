@@ -141,11 +141,30 @@ export default function Home() {
                   condimentum id viverra nulla.
                 </p>
               </div>
-              <div className="mt-12 -mb-10 sm:-mb-24 lg:-mb-80">
+
+              <div class="flex py-12">
+                <div class="text-div">
+                  <span class="gamut-q5usls-Text e8i0p5k0"></span>
+                  <span class="gamut-8qhwok-Text e8i0p5k0">
+                    It's time to start investing in yourself
+                  </span>
+                  <span class="gamut-9ats16-Text e8i0p5k0">
+                    Because learning to code might be the easiest way to change
+                    your career.
+                  </span>
+                  <a
+                    data-testid="cta-block-button"
+                    class="e1w6mdco0 gamut-1e4ikq5-ResetElement-createButtonComponent e1bhhzie0"
+                    href="/register"
+                    aria-disabled="false"
+                  >
+                    Get Started
+                  </a>
+                </div>
                 <img
-                  className="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
-                  src="https://tailwindui.com/img/component-images/green-project-app-screenshot.jpg"
+                  src="/webpack/27525026eeb382d470ebac72a8d90846.svg"
                   alt=""
+                  class="gamut-70lq98-StyledImage e1fgbw4p0"
                 />
               </div>
             </div>

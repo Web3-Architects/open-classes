@@ -7,6 +7,7 @@ export default function WalletButton({
 }) {
   return (
     <Button
+      className="wallet-button"
       onClick={() => {
         if (!provider) {
           loadWeb3Modal();
