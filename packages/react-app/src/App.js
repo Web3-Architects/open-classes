@@ -2,15 +2,19 @@ import React from "react";
 import { Contract } from "@ethersproject/contracts";
 import { getDefaultProvider } from "@ethersproject/providers";
 import { useQuery } from "@apollo/react-hooks";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import { Body, Button, Header, Image, Link } from "./components";
-import logo from "./ethereumLogo.png";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Lesson from "./pages/Lesson";
 import useWeb3Modal from "./hooks/useWeb3Modal";
 
 import { addresses, abis } from "@project/contracts";
 import GET_TRANSFERS from "./graphql/subgraph";
-import Example from "./components/Example";
-import Nav from "./components/Nav";
+import LandingPage from "./components/LandingPage";
+import ColumnsSections from "./components/ColumnsSections";
+import Header from "./components/Header";
+import Cta from "./components/Cta";
 
 async function readOnChainData() {
   // Should replace with the end-user wallet, e.g. Metamask
@@ -29,22 +33,6 @@ async function readOnChainData() {
   console.log({ tokenBalance: tokenBalance.toString() });
 }
 
-function WalletButton({ provider, loadWeb3Modal, logoutOfWeb3Modal }) {
-  return (
-    <Button
-      onClick={() => {
-        if (!provider) {
-          loadWeb3Modal();
-        } else {
-          logoutOfWeb3Modal();
-        }
-      }}
-    >
-      {!provider ? "Connect Wallet" : "Disconnect Wallet"}
-    </Button>
-  );
-}
-
 function App() {
   const { loading, error, data } = useQuery(GET_TRANSFERS);
   const [provider, loadWeb3Modal, logoutOfWeb3Modal] = useWeb3Modal();
@@ -56,38 +44,49 @@ function App() {
   }, [loading, error, data]);
 
   return (
-    <div>
-      <Nav />
-      <Header>
-        <WalletButton
-          provider={provider}
-          loadWeb3Modal={loadWeb3Modal}
-          logoutOfWeb3Modal={logoutOfWeb3Modal}
-        />
-      </Header>
-      <Body>
-        <Image src={logo} alt="react-logo" />
-        <p>
-          Edit <code>packages/react-app/src/App.js</code> and save to reload.
-        </p>
-        {/* Remove the "hidden" prop and open the JavaScript console in the browser to see what this function does */}
-        <Button hidden onClick={() => readOnChainData()}>
-          Read On-Chain Balance
-        </Button>
-        <Example />
-        <Link
-          href="https://ethereum.org/developers/#getting-started"
-          style={{ marginTop: "8px" }}
-        >
-          Learn Ethereum
-        </Link>
-        <Link href="https://reactjs.org">Learn React</Link>
-        <Link href="https://thegraph.com/docs/quick-start">
-          Learn The Graph
-        </Link>
-      </Body>
-    </div>
+    <Router>
+      <div>
+        <Header />
+        {/* <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          </ul>
+        </nav> */}
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/lesson">
+            <Lesson />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
+  // <div>
+  //   <Header
+  //     provider={provider}
+  //     loadWeb3Modal={loadWeb3Modal}
+  //     logoutOfWeb3Modal={logoutOfWeb3Modal}
+  //   />
+  //   <Body>
+  //     <ColumnsSections />
+  //   </Body>
+  // </div>
 }
 
 export default App;
