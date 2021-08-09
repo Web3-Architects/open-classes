@@ -3,25 +3,26 @@ import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { navigation } from "../mocks/home";
 import "./Header.css";
+import logo from "../assets/logo.png";
 
 const Header = ({}) => (
-  <Popover as="header" className="relative">
+  <Popover as="header" className="relative bg-yellow text-black font-bold">
     {({ open }) => (
       <>
-        <div className="header py-6">
+        <div className="header py-6 bg-yellow text-black font-bold">
           <nav
             className="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6"
             aria-label="Global"
           >
             <div className="flex items-center flex-1">
               <div className="flex items-center justify-between w-full md:w-auto">
+                {/* <a href="#">
+                  <span className="sr-only">Workflow</span>
+                  <img className="h-8 w-auto sm:h-10" src={logo} alt="" />
+                </a> */}
                 <a href="#">
                   <span className="sr-only">Workflow</span>
-                  <img
-                    className="h-8 w-auto sm:h-10"
-                    src="https://tailwindui.com/img/logos/workflow-mark-teal-200-cyan-400.svg"
-                    alt=""
-                  />
+                  <h1 className="text-3xl uppercase">Open_Classes</h1>
                 </a>
                 <div className="-mr-2 flex items-center md:hidden">
                   <Popover.Button className="bg-gray-900 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white">
@@ -35,7 +36,7 @@ const Header = ({}) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-base font-medium text-white hover:text-gray-300"
+                    className="text-base font-medium text-black hover:text-black-300"
                   >
                     {item.name}
                   </a>
@@ -45,13 +46,13 @@ const Header = ({}) => (
             <div className="hidden md:flex md:items-center md:space-x-6">
               <a
                 href="#"
-                className="text-base font-medium text-white hover:text-gray-300"
+                className="text-base font-medium text-black hover:text-black-300"
               >
                 Log in
               </a>
               <a
                 href="#"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-black hover:bg-black"
               >
                 Start free trial
               </a>
