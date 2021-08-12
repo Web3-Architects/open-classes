@@ -1,4 +1,5 @@
 # generic folders
+node_modules
 build/
 coverage/
 dist/
@@ -20,3 +21,6 @@ yarn-error.log*
 # templates
 templates/**/build/
 templates/**/src/types/
+node_modules
+node_modules
+node_modules
