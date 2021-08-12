@@ -64,6 +64,7 @@ export default function Example() {
                 <div className="relative h-full" style={{ minHeight: "36rem" }}>
                   <div className="absolute inset-0 border-2 border-gray-200 border-dashed rounded-lg">
                     <iframe
+                      title="CodeSandbox"
                       src="https://codesandbox.io/embed/new?codemirror=1&highlights=6,7,8,9"
                       style={{
                         width: "100%",

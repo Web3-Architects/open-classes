@@ -23,7 +23,9 @@ const Header = ({}) => (
                 </a> */}
                 <a href="#">
                   <span className="sr-only">Workflow</span>
-                  <h1 className="text-3xl uppercase">Open_Classes</h1>
+                  <a className="text-3xl uppercase" href="/">
+                    Open_Classes
+                  </a>
                 </a>
                 <div className="-mr-2 flex items-center md:hidden">
                   <Popover.Button className="bg-gray-900 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white">

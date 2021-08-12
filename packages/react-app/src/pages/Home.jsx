@@ -1,40 +1,5 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  const colors = require('tailwindcss/colors')
-  
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        colors: {
-          teal: colors.teal,
-          cyan: colors.cyan,
-        }
-      }
-    },
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/aspect-ratio'),
-    ]
-  }
-  ```
-*/
-import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { ChevronRightIcon, ExternalLinkIcon } from "@heroicons/react/solid";
-import {
-  blogPosts,
-  features,
-  footerNavigation,
-  navigation,
-} from "../mocks/home";
+import { ChevronRightIcon } from "@heroicons/react/solid";
+import { blogPosts, footerNavigation } from "../mocks/home";
 import "./Home.css";
 import investImage from "../assets/invest.svg";
 import hero from "../assets/hero.svg";
