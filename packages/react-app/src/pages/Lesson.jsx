@@ -1,26 +1,6 @@
-// *
-//   This example requires Tailwind CSS v2.0+
-
-//   This example requires some changes to your config:
-
-//   ```
-//   // tailwind.config.js
-//   module.exports = {
-//     // ...
-//     plugins: [
-//       // ...
-//       require('@tailwindcss/forms'),
-//     ]
-//   }
-//   ```
-// */
 import { useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 const codeExample = `const { providers } = require('ethers');
 
@@ -92,8 +72,6 @@ export default function Example() {
                         borderRadius: "4px",
                         overflow: "hidden",
                       }}
-                      // {{marginRight: spacing + 'em'}}
-                      // style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
                       allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
                       view="split"
                       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"

@@ -4,6 +4,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { navigation } from "../mocks/home";
 import "./Header.css";
 import logo from "../assets/logo.png";
+import MetamaskButton from "./MetamaskButton";
 
 const Header = ({}) => (
   <Popover as="header" className="relative bg-yellow text-black font-bold">
@@ -44,12 +45,13 @@ const Header = ({}) => (
               </div>
             </div>
             <div className="hidden md:flex md:items-center md:space-x-6">
-              <a
+              {/* <a
                 href="#"
                 className="text-base font-medium text-black hover:text-black-300"
               >
                 Connect wallet
-              </a>
+              </a> */}
+              <MetamaskButton />
               <a
                 href="#"
                 className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-black hover:bg-black"
