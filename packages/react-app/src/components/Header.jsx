@@ -48,13 +48,13 @@ const Header = ({}) => (
                 href="#"
                 className="text-base font-medium text-black hover:text-black-300"
               >
-                Log in
+                Connect wallet
               </a>
               <a
                 href="#"
                 className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-black hover:bg-black"
               >
-                Start free trial
+                Start learning
               </a>
             </div>
           </nav>

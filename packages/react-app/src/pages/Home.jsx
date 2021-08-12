@@ -71,9 +71,9 @@ export default function Home() {
                       />
                     </a>
                     <h1 className="mt-4 text-4xl tracking-tight font-extrabold text-black sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
-                      <span className="block">A better way to</span>
+                      <span className="block">Learn Skills. </span>
                       <span className="pb-3 block bg-clip-text text-black bg-gradient-to-r from-teal-200 to-cyan-400 sm:pb-5">
-                        ship web apps
+                        Earn Credentials.
                       </span>
                     </h1>
                     <p className="text-base text-black-300 sm:text-xl lg:text-lg xl:text-xl">
@@ -87,13 +87,13 @@ export default function Home() {
                           type="submit"
                           className="block w-full sm:w-auto py-3 px-4 rounded-md shadow button-blue m-auto lg:mr-auto lg:ml-0"
                         >
-                          Start free trial
+                          Start learning
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="mb-12 lg:m-0 lg:relative lg:ml-24">
+                <div className="mb-12 lg:m-0 lg:flex lg:relative lg:ml-24">
                   <div className="mx-auto max-w-xs px-4 sm:px-6 lg:px-0">
                     {/* Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ */}
                     <img
@@ -103,127 +103,6 @@ export default function Home() {
                     />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Feature section with screenshot */}
-          <div className="relative py-16 invest-section">
-            <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
-              {/* <div>
-                <h2 className="text-base font-semibold tracking-wider uppercase">
-                  Serverless
-                </h2>
-                <p className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                  No server? No problem.
-                </p>
-                <p className="mt-5 max-w-prose mx-auto text-xl">
-                  Phasellus lorem quam molestie id quisque diam aenean nulla in.
-                  Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend
-                  condimentum id viverra nulla.
-                </p>
-              </div> */}
-
-              <div class="invest flex flex-col justify-center items-center md:flex-row py-12">
-                <img src={investImage} alt="" class="" />
-                <div class="text-div text-left mb-10 sm:ml-20 lg:ml-40 lg:mb-0">
-                  <p class="big text-5xl font-bold">
-                    It's time to start investing in yourself
-                  </p>
-                  <p class="small my-6">
-                    Because learning to code might be the easiest way to change
-                    your career.
-                  </p>
-                  <a
-                    data-testid="cta-block-button"
-                    class="button-yellow font-bold p-3 "
-                    href="/lesson"
-                    aria-disabled="false"
-                  >
-                    Get Started
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Blog section */}
-          <div className="relative bg-gray-50 py-16 sm:py-24 lg:py-32">
-            <div className="relative">
-              <div className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
-                <h2 className="text-base font-semibold tracking-wider text-cyan-600 uppercase">
-                  Learn
-                </h2>
-                <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-                  Helpful Resources
-                </p>
-                <p className="mt-5 mx-auto max-w-prose text-xl text-gray-500">
-                  Phasellus lorem quam molestie id quisque diam aenean nulla in.
-                  Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend
-                  condimentum id viverra nulla.
-                </p>
-              </div>
-              <div className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-3 lg:max-w-7xl">
-                {blogPosts.map((post) => (
-                  <div
-                    key={post.id}
-                    className="flex flex-col rounded-lg shadow-lg overflow-hidden"
-                  >
-                    <div className="flex-shrink-0">
-                      <img
-                        className="h-48 w-full object-cover"
-                        src={post.imageUrl}
-                        alt=""
-                      />
-                    </div>
-                    <div className="flex-1 bg-white p-6 flex flex-col justify-between">
-                      <div className="flex-1">
-                        <p className="text-sm font-medium text-cyan-600">
-                          <a
-                            href={post.category.href}
-                            className="hover:underline"
-                          >
-                            {post.category.name}
-                          </a>
-                        </p>
-                        <a href={post.href} className="block mt-2">
-                          <p className="text-xl font-semibold text-gray-900">
-                            {post.title}
-                          </p>
-                          <p className="mt-3 text-base text-gray-500">
-                            {post.preview}
-                          </p>
-                        </a>
-                      </div>
-                      <div className="mt-6 flex items-center">
-                        <div className="flex-shrink-0">
-                          <a href={post.author.href}>
-                            <img
-                              className="h-10 w-10 rounded-full"
-                              src={post.author.imageUrl}
-                              alt={post.author.name}
-                            />
-                          </a>
-                        </div>
-                        <div className="ml-3">
-                          <p className="text-sm font-medium text-gray-900">
-                            <a
-                              href={post.author.href}
-                              className="hover:underline"
-                            >
-                              {post.author.name}
-                            </a>
-                          </p>
-                          <div className="flex space-x-1 text-sm text-gray-500">
-                            <time dateTime={post.datetime}>{post.date}</time>
-                            <span aria-hidden="true">&middot;</span>
-                            <span>{post.readingLength} read</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
           </div>
@@ -264,6 +143,46 @@ export default function Home() {
                     </a>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Feature section with screenshot */}
+          <div className="relative py-16 invest-section">
+            <div className="mx-auto max-w-md px-4 text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
+              {/* <div>
+                <h2 className="text-base font-semibold tracking-wider uppercase">
+                  Serverless
+                </h2>
+                <p className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                  No server? No problem.
+                </p>
+                <p className="mt-5 max-w-prose mx-auto text-xl">
+                  Phasellus lorem quam molestie id quisque diam aenean nulla in.
+                  Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend
+                  condimentum id viverra nulla.
+                </p>
+              </div> */}
+
+              <div class="invest flex flex-col justify-center items-center md:flex-row py-12">
+                <img src={investImage} alt="" class="" />
+                <div class="text-div text-left mb-10 sm:ml-20 lg:ml-40 lg:mb-0">
+                  <p class="big text-5xl font-bold">
+                    It's time to start investing in yourself
+                  </p>
+                  <p class="small my-6">
+                    Because learning to code might be the easiest way to change
+                    your career.
+                  </p>
+                  <a
+                    data-testid="cta-block-button"
+                    class="button-yellow font-bold p-3 "
+                    href="/lesson"
+                    aria-disabled="false"
+                  >
+                    Get Started
+                  </a>
+                </div>
               </div>
             </div>
           </div>
