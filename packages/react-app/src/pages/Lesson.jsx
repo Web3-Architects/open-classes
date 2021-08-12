@@ -1,135 +1,111 @@
-/* This example requires Tailwind CSS v2.0+ */
-const posts = [
-  {
-    title: "Boost your conversion rate",
-    href: "#",
-    category: { name: "Article", href: "#" },
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
-    imageUrl:
-      "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    readingTime: "6 min",
-    author: {
-      name: "Roel Aufderehar",
-      href: "#",
-      imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-  {
-    title: "How to use search engine optimization to drive sales",
-    href: "#",
-    category: { name: "Video", href: "#" },
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facilis asperiores porro quaerat doloribus, eveniet dolore. Adipisci tempora aut inventore optio animi., tempore temporibus quo laudantium.",
-    date: "Mar 10, 2020",
-    datetime: "2020-03-10",
-    imageUrl:
-      "https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    readingTime: "4 min",
-    author: {
-      name: "Brenna Goyette",
-      href: "#",
-      imageUrl:
-        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-  {
-    title: "Improve your customer experience",
-    href: "#",
-    category: { name: "Case Study", href: "#" },
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.",
-    date: "Feb 12, 2020",
-    datetime: "2020-02-12",
-    imageUrl:
-      "https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    readingTime: "11 min",
-    author: {
-      name: "Daniela Metz",
-      href: "#",
-      imageUrl:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-];
+// *
+//   This example requires Tailwind CSS v2.0+
 
-export default function ColumnsSections() {
+//   This example requires some changes to your config:
+
+//   ```
+//   // tailwind.config.js
+//   module.exports = {
+//     // ...
+//     plugins: [
+//       // ...
+//       require('@tailwindcss/forms'),
+//     ]
+//   }
+//   ```
+// */
+import { useEffect } from "react";
+import Prism from "prismjs";
+import "prismjs/themes/prism-tomorrow.css";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const codeExample = `const { providers } = require('ethers');
+
+const provider = new providers.Web3Provider(ganacheProvider);
+`;
+
+export default function Example() {
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
   return (
-    <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
-      <div className="absolute inset-0">
-        <div className="bg-white h-1/3 sm:h-2/3" />
-      </div>
-      <div className="relative max-w-7xl mx-auto">
-        <div className="text-center">
-          <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
-            From the blog
-          </h2>
-          <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa
-            libero labore natus atque, ducimus sed.
-          </p>
-        </div>
-        <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-          {posts.map((post) => (
-            <div
-              key={post.title}
-              className="flex flex-col rounded-lg shadow-lg overflow-hidden"
-            >
-              <div className="flex-shrink-0">
-                <img
-                  className="h-48 w-full object-cover"
-                  src={post.imageUrl}
-                  alt=""
-                />
-              </div>
-              <div className="flex-1 bg-white p-6 flex flex-col justify-between">
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-indigo-600">
-                    <a href={post.category.href} className="hover:underline">
-                      {post.category.name}
-                    </a>
-                  </p>
-                  <a href={post.href} className="block mt-2">
-                    <p className="text-xl font-semibold text-gray-900">
-                      {post.title}
+    <>
+      {/* Background color split screen for large screens */}
+      <div className="relative min-h-screen flex flex-col">
+        {/* 3 column wrapper */}
+        <div className="flex-grow w-full max-w-full  mx-auto xl:px-5 lg:flex">
+          {/* Left sidebar & main wrapper */}
+          <div className="flex-1 min-w-0 bg-white xl:flex">
+            <div className="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-4/12 xl:border-r xl:border-gray-200 bg-white">
+              <div className="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0 overflow-y-auto">
+                {/* Start left column area */}
+                <div className="h-full relative" style={{ minHeight: "12rem" }}>
+                  <div className="absolute inset-0 border-2 border-gray-200 border-dashed rounded-lg p-5">
+                    <h2 className="text-4xl mb-4">Lesson 1</h2>
+                    <p className="text-xl font-bold mb-10">
+                      Querying events with ethers.js
                     </p>
-                    <p className="mt-3 text-base text-gray-500">
-                      {post.description}
+                    <p className="text-xl mb-4">
+                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                      Molestias sit non iure quasi esse in mollitia magnam quos
+                      aliquid quas, assumenda quidem ea illo consequatur rerum
+                      labore temporibus necessitatibus amet!
                     </p>
-                  </a>
-                </div>
-                <div className="mt-6 flex items-center">
-                  <div className="flex-shrink-0">
-                    <a href={post.author.href}>
-                      <span className="sr-only">{post.author.name}</span>
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src={post.author.imageUrl}
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-gray-900">
-                      <a href={post.author.href} className="hover:underline">
-                        {post.author.name}
-                      </a>
+                    <pre>
+                      <code class="language-solidity">
+                        {`const {providers} = require('ethers'); 
+                        const provider = new 
+                        providers.Web3Provider(ganacheProvider); `}
+                      </code>
+                    </pre>
+
+                    <p className="text-xl mb-4">
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit
+                      cum quisquam consequuntur animi culpa.
                     </p>
-                    <div className="flex space-x-1 text-sm text-gray-500">
-                      <time dateTime={post.datetime}>{post.date}</time>
-                      <span aria-hidden="true">&middot;</span>
-                      <span>{post.readingTime} read</span>
-                    </div>
+                    <p className="text-xl mb-4">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Modi incidunt accusantium et minus suscipit aut dolorem
+                      aliquid cum? Ratione totam cupiditate ea adipisci corporis
+                      in architecto rem illo ab mollitia!
+                    </p>
                   </div>
                 </div>
+                {/* End left column area */}
               </div>
             </div>
-          ))}
+
+            <div className="bg-white lg:min-w-0 lg:flex-1">
+              <div className="h-full py-6 px-4 sm:px-6 lg:px-8">
+                {/* Start main area*/}
+                <div className="relative h-full" style={{ minHeight: "36rem" }}>
+                  <div className="absolute inset-0 border-2 border-gray-200 border-dashed rounded-lg">
+                    <iframe
+                      src="https://codesandbox.io/embed/new?codemirror=1&highlights=6,7,8,9"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        border: 0,
+                        borderRadius: "4px",
+                        overflow: "hidden",
+                      }}
+                      // {{marginRight: spacing + 'em'}}
+                      // style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+                      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                      view="split"
+                      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+                    ></iframe>
+                  </div>
+                </div>
+                {/* End main area */}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
