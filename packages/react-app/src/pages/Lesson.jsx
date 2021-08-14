@@ -29,28 +29,70 @@ export default function Example() {
                       Querying events with ethers.js
                     </p>
                     <p className="text-xl mb-4">
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Molestias sit non iure quasi esse in mollitia magnam quos
-                      aliquid quas, assumenda quidem ea illo consequatur rerum
-                      labore temporibus necessitatibus amet!
+                      If a smart contract emits an event with one or several indexed arguments, it's possible to filter logs to
+                      retrieve events that only match these arguments. Here's how to do it with ethers.
+                    </p>
+                    <p className="text-xl mb-4">
+                     We first create an EventFilter:
                     </p>
                     <pre>
-                      <code class="language-solidity">
-                        {`const {providers} = require('ethers'); 
-                        const provider = new 
-                        providers.Web3Provider(ganacheProvider); `}
+                      <code class="language-javascript">
+                        {`const eventFilter = {
+  address: "0x57b...",
+  topics,
+  fromBlock: 9109186,
+  toBlock: "latest",
+}`}
                       </code>
                     </pre>
 
                     <p className="text-xl mb-4">
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit
-                      cum quisquam consequuntur animi culpa.
+                      In it, we specify the target contract's address and the range of blocks to query,
+                      often we want to query up to the latest block but I recommend adjusting the fromBlock
+                      value. For example, it can be a few blocks before the one that included the contract creation.
+                      <br/><br/>But where do <i>topics</i> come from? Ethers provides a convenient way to match the topics we want.
+                      Here's an example, for a standard ERC-20 Transfer event:
                     </p>
+                    <pre>
+                      <code class="language-javascript">
+                        {`// Topics for all token transfers *from* myAddress *to* otherAddress:
+const topics = contract.filters.Transfer(myAddress, otherAddress)?.topics;`}
+                      </code>
+                    </pre>
                     <p className="text-xl mb-4">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Modi incidunt accusantium et minus suscipit aut dolorem
-                      aliquid cum? Ratione totam cupiditate ea adipisci corporis
-                      in architecto rem illo ab mollitia!
+                      For more examples please see: <u><a href="https://docs.ethers.io/v5/concepts/events/#events--filters">ethers docs on event filters</a></u>
+                      <br/><br/>
+                      By passing our event filter we can now get the logs we're looking for:
+                    </p>
+                     <pre>
+                      <code class="language-javascript">
+                        {`let logs;
+ try {
+    logs = await provider.getLogs(eventFilter);
+  } catch (err) {
+    console.error(\`Error getting logs:\`, err);
+  }`}
+                      </code>
+                    </pre>
+                    <br/>
+                    <p className="text-xl mb-4">
+                      Now, if we want to get the values of the input parameters of the events,
+                      we need to parse these logs. For that, we can use <i>interface.parseLogs</i>,
+                      a method available on a contract interface.
+                    </p>
+                     <pre>
+                      <code class="language-javascript">
+                        {`// Instantiate the contract interface from its abi
+const Interface = new ethers.utils.Interface(abi);
+
+// Parse the logs
+const parsedLogs = logs.map((log) => contractInterface.parseLog(log));
+// Print the parsed logs
+parsedLogs.forEach(parsedLog => console.log(parsedLog));`}
+                      </code>
+                    </pre>
+                    <p className="text-xl mb-4">
+                    Finally you should see the values emitted with the events in the <i>args</i> property of a parsed log!
                     </p>
                   </div>
                 </div>
