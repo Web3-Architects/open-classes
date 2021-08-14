@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
+import ValidateChallenge from "../components/ValidateChallenge";
 
 const codeExample = `const { providers } = require('ethers');
 
@@ -124,8 +125,8 @@ parsedLogs.forEach(parsedLog => console.log(parsedLog));`}
             <div className="bg-white lg:min-w-0 lg:flex-1">
               <div className="h-full py-6 px-4 sm:px-6 lg:px-8">
                 {/* Start main area*/}
-                <div className="relative h-full" style={{ minHeight: "36rem" }}>
-                  <div className="absolute inset-0 border-2 border-gray-200 border-dashed rounded-lg">
+                <div className="relative h-full flex flex-col" style={{ minHeight: "36rem" }}>
+                  <div className="inset-0 border-2 border-gray-200 border-dashed rounded-lg h-full">
                     <iframe
                       src="https://codesandbox.io/embed/ethers-events-query-forked-ixsmu?fontsize=14&hidenavigation=1&theme=dark"
                       // style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
@@ -140,6 +141,9 @@ parsedLogs.forEach(parsedLog => console.log(parsedLog));`}
                       allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
                       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
                     ></iframe>
+                  </div>
+                  <div className="inset-0 border-2 border-gray-200 border-dashed rounded-lg p-4">
+                    <ValidateChallenge />
                   </div>
                 </div>
                 {/* End main area */}
