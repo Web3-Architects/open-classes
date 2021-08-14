@@ -15,7 +15,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
     // This is so the contract can keep track of who to assign the result to when it comes back.
     mapping(bytes32 => address) private users;
     // stores the user, and the result of the random number
-    mapping(address => uint256) public results;
+    mapping(address => uint256) private results;
 
     /**
      * @notice Constructor inherits VRFConsumerBase
