@@ -9,7 +9,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
     uint256 public randomResult;
 
     event RandomNumberRequested(bytes32 indexed requestId, address indexed user);
-    event RandomNumberReceived(bytes32 indexed requestId, uint256 indexed result);
+    event RandomNumberReceived(address indexed to, uint256 indexed randomNumber);
 
     // stores a mapping between the requestID (returned when a request is made), and the address of the user.
     // This is so the contract can keep track of who to assign the result to when it comes back.
@@ -62,8 +62,9 @@ contract RandomNumberConsumer is VRFConsumerBase {
     }
 
     function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
-        results[users[requestId]] = randomness;
-        emit RandomNumberReceived(requestId, randomness);
+        address to = users[requestId];
+        results[to] = randomness;
+        emit RandomNumberReceived(to, randomness);
     }
 
     function validateChallenge(uint256 randomNumber) public view returns (bool) {
