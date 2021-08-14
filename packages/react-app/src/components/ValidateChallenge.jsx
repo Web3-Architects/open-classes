@@ -18,7 +18,9 @@ const ValidateChallenge = () => {
 
   const callToValidateChallenge = useCallback(
     async ({ randomNumber }) => {
-      await challengeContract.validateChallenge();
+      // TODO: pass DID subject generated from 3ID Connect 
+      const DIDSubject = "did:subject";
+      await challengeContract.validateChallenge(randomNumber, DIDSubject);
     },
     [challengeContract]);
 
