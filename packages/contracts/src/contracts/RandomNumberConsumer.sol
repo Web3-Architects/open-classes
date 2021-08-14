@@ -1,12 +1,20 @@
-pragma solidity 0.6.6;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
+import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
+import "./IOpenCredentials.sol";
+
 contract RandomNumberConsumer is VRFConsumerBase {
- uint256 private constant REQUEST_IN_PROGRESS = 42;
+    
+    uint256 private constant REQUEST_IN_PROGRESS = 42;
 
     bytes32 private keyHash;
     uint256 private fee;
     uint256 public randomResult;
+    address private owner;
+    
+    IOpenCredentials public openCredentials; 
+    string public constant lessonName = "Querying events with ethers";
 
     event RandomNumberRequested(bytes32 indexed requestId, address indexed user);
     event RandomNumberReceived(address indexed to, uint256 indexed randomNumber);
@@ -38,7 +46,6 @@ contract RandomNumberConsumer is VRFConsumerBase {
         bytes32 _keyHash,
         uint256 _fee
     )
-        public
         VRFConsumerBase(
             vrfCoordinator,
             link // link Token
@@ -46,6 +53,8 @@ contract RandomNumberConsumer is VRFConsumerBase {
     {
         keyHash = _keyHash;
         fee = _fee;
+        openCredentials = IOpenCredentials(0xCbAd576D57457dBD17888cE4e73b4A173479B46D);
+        owner = msg.sender;
     }
 
     // function hashSeriesNumber(string calldata series, uint256 number) external pure returns (bytes32) {
@@ -67,10 +76,17 @@ contract RandomNumberConsumer is VRFConsumerBase {
         emit RandomNumberReceived(to, randomness);
     }
 
-    function validateChallenge(uint256 randomNumber) public view returns (bool) {
+    function validateChallenge(uint256 randomNumber, string memory didSubject) external {
         require(results[msg.sender] != 0, "No result");
         require(results[msg.sender] != REQUEST_IN_PROGRESS, "Request in progress");
-        return results[msg.sender] == randomNumber;
+        require(results[msg.sender] == randomNumber, "Random number is incorrect");
+        
+        openCredentials.issueCredentials(msg.sender, didSubject, lessonName);
+    }
+    
+    function changeOpenCredAddress(address newAddress) external {
+        require(msg.sender == owner);
+        openCredentials = IOpenCredentials(newAddress);
     }
 
     /**
@@ -80,6 +96,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
      * THIS IS PURELY FOR EXAMPLE PURPOSES.
      */
     function withdrawLink() external {
+        require(msg.sender == owner);
         require(LINK.transfer(msg.sender, LINK.balanceOf(address(this))), "Unable to transfer");
     }
 }
