@@ -113,6 +113,7 @@ parsedLogs.forEach(parsedLog => console.log(parsedLog));`}
                         <li>Click on "Emit event"</li>
                         <li>Confirm the transaction</li>
                         <li>Complete the code in the CodeSandbox to the right to print the value of the random number in the sandbox's console</li>
+                        <li>Finally, submit the number and confirm the transaction to validate this challenge and get your credentials!</li>
                       </ol>
                   </div>
                 </div>
