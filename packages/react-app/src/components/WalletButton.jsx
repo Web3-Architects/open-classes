@@ -5,6 +5,7 @@ export default function WalletButton({
   loadWeb3Modal,
   logoutOfWeb3Modal,
 }) {
+  console.log("provider wallet", provider);
   return (
     <Button
       className="wallet-button"

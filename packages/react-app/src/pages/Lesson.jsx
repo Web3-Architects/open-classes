@@ -64,8 +64,8 @@ export default function Example() {
                 <div className="relative h-full" style={{ minHeight: "36rem" }}>
                   <div className="absolute inset-0 border-2 border-gray-200 border-dashed rounded-lg">
                     <iframe
-                      title="CodeSandbox"
-                      src="https://codesandbox.io/embed/new?codemirror=1&highlights=6,7,8,9"
+                      src="https://codesandbox.io/embed/ethers-test-forked-sny8n?expanddevtools=1&fontsize=14&hidenavigation=1&moduleview=1&theme=dark"
+                      // style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
                       style={{
                         width: "100%",
                         height: "100%",
@@ -73,8 +73,8 @@ export default function Example() {
                         borderRadius: "4px",
                         overflow: "hidden",
                       }}
+                      title="ethers-test (forked)"
                       allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-                      view="split"
                       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
                     ></iframe>
                   </div>
