@@ -94,6 +94,17 @@ parsedLogs.forEach(parsedLog => console.log(parsedLog));`}
                     <p className="text-xl mb-4">
                     Finally you should see the values emitted with the events in the <i>args</i> property of a parsed log!
                     </p>
+                     <p className="text-xl font-bold mb-10">
+                      Challenge
+                    </p>
+                    <p className="text-xl mb-4">We deployed a smart contract that will emit an event with a random number and the ethereum address you
+                      are connected with. The goal for you is to retrieve the events from that contract filtered by your address to find what that random number is.
+                    </p>
+                    <ol>
+                      <li>Make sure you are connected with an Ethereum account, its address will be the one emitted in the event</li>
+                      <li>Click on "Emit event"</li>
+                      <li>Complete the code in the CodeSandbox to the right to print the value of the random number</li>
+                    </ol>
                   </div>
                 </div>
                 {/* End left column area */}
