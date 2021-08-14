@@ -97,14 +97,23 @@ parsedLogs.forEach(parsedLog => console.log(parsedLog));`}
                      <p className="text-xl font-bold mb-10">
                       Challenge
                     </p>
-                    <p className="text-xl mb-4">We deployed a smart contract that will emit an event with a random number and the ethereum address you
-                      are connected with. The goal for you is to retrieve the events from that contract filtered by your address to find what that random number is.
+                    <p className="text-xl mb-4">We already deployed a smart contract that will emit an event with a random number and the ethereum address you
+                      are connected with. This event has the following signature, where <i>to</i> is your address:
                     </p>
-                    <ol>
-                      <li>Make sure you are connected with an Ethereum account, its address will be the one emitted in the event</li>
-                      <li>Click on "Emit event"</li>
-                      <li>Complete the code in the CodeSandbox to the right to print the value of the random number</li>
-                    </ol>
+                     <pre>
+                      <code class="language-javascript">
+                        {`event RandomNumberReceived(address indexed to, uint256 indexed randomNumber);`}
+                      </code>
+                    </pre>
+                    <p className="text-xl mb-4">
+                      The goal for you is to find out what that random number is! And for that, you will have to retrieve the events from that contract, filtered by your address. 
+                    </p>
+                      <ol className="list-decimal mx-4">
+                        <li>Make sure you are connected with an Ethereum account which has some Rinkeby ETH</li>
+                        <li>Click on "Emit event"</li>
+                        <li>Confirm the transaction</li>
+                        <li>Complete the code in the CodeSandbox to the right to print the value of the random number in the sandbox's console</li>
+                      </ol>
                   </div>
                 </div>
                 {/* End left column area */}
