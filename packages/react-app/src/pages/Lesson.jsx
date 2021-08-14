@@ -127,7 +127,7 @@ parsedLogs.forEach(parsedLog => console.log(parsedLog));`}
                 <div className="relative h-full" style={{ minHeight: "36rem" }}>
                   <div className="absolute inset-0 border-2 border-gray-200 border-dashed rounded-lg">
                     <iframe
-                      src="https://codesandbox.io/embed/ethers-test-forked-sny8n?expanddevtools=1&fontsize=14&hidenavigation=1&moduleview=1&theme=dark"
+                      src="https://codesandbox.io/embed/ethers-events-query-forked-ixsmu?fontsize=14&hidenavigation=1&theme=dark"
                       // style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
                       style={{
                         width: "100%",
