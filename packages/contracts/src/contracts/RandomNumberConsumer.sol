@@ -9,21 +9,21 @@ contract RandomNumberConsumer is VRFConsumerBase {
     uint256 public randomResult;
 
     event RandomNumberRequested(bytes32 indexed requestId, address indexed user);
-    event RandomNumberReceived(bytes32 indexed requestId, uint256 indexed result);
+    event RandomNumberReceived(address indexed to, uint256 indexed randomNumber);
 
     // stores a mapping between the requestID (returned when a request is made), and the address of the user.
     // This is so the contract can keep track of who to assign the result to when it comes back.
     mapping(bytes32 => address) private users;
     // stores the user, and the result of the random number
-    mapping(address => uint256) public results;
+    mapping(address => uint256) private results;
 
     /**
      * @notice Constructor inherits VRFConsumerBase
      *
-     * @dev NETWORK: KOVAN
-     * @dev   Chainlink VRF Coordinator address: 0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9
-     * @dev   LINK token address:                0xa36085F69e2889c224210F603D836748e7dC0088
-     * @dev   Key Hash:   0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4
+     * @dev NETWORK: Rinkeby
+     * @dev   Chainlink VRF Coordinator address: 0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B
+     * @dev   LINK token address:                0x01BE23585060835E02B77ef475b0Cc51aA1e0709
+     * @dev   Key Hash:   0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311
      * @dev   Fee:        0.1 LINK (100000000000000000)
      *
      * @param vrfCoordinator address of the VRF Coordinator
@@ -62,8 +62,9 @@ contract RandomNumberConsumer is VRFConsumerBase {
     }
 
     function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
-        results[users[requestId]] = randomness;
-        emit RandomNumberReceived(requestId, randomness);
+        address to = users[requestId];
+        results[to] = randomness;
+        emit RandomNumberReceived(to, randomness);
     }
 
     function validateChallenge(uint256 randomNumber) public view returns (bool) {
