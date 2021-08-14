@@ -60,7 +60,7 @@ const topics = contract.filters.Transfer(myAddress, otherAddress)?.topics;`}
                       </code>
                     </pre>
                     <p className="text-xl mb-4">
-                      For more examples please see: <u><a href="https://docs.ethers.io/v5/concepts/events/#events--filters">ethers docs on event filters</a></u>
+                      For more examples and an explanation about what topics are, please visit <u><a href="https://docs.ethers.io/v5/concepts/events/#events--filters">this section of ethers' docs</a></u>
                       <br/><br/>
                       By passing our event filter we can now get the logs we're looking for:
                     </p>
