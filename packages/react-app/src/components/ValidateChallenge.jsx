@@ -1,7 +1,6 @@
-
 import { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
-import {  abis } from "@project/contracts";
+import { abis } from "@project/contracts";
 
 import useWeb3Modal from "../hooks/useWeb3Modal";
 
@@ -12,48 +11,69 @@ const ValidateChallenge = () => {
   const [challengeContract, setChallengeContract] = useState(null);
 
   useEffect(() => {
-    const contract = new ethers.Contract(CHALLENGE_CONTRACT_ADDRESS, abis.randomNumberConsumer, provider);
-    setChallengeContract(contract)
-  }, [provider])
+    const contract = new ethers.Contract(
+      CHALLENGE_CONTRACT_ADDRESS,
+      abis.randomNumberConsumer.abi,
+      provider
+    );
+
+    setChallengeContract(contract);
+  }, [provider]);
 
   const callToValidateChallenge = useCallback(
     async ({ randomNumber }) => {
-      // TODO: pass DID subject generated from 3ID Connect 
+      // TODO: pass DID subject generated from 3ID Connect
       const DIDSubject = "did:subject";
-      await challengeContract.validateChallenge(randomNumber, DIDSubject);
+      console.log("ctV rando,", randomNumber);
+      const signer = challengeContract.connect(provider.getSigner());
+      await signer.validateChallenge(randomNumber, DIDSubject);
     },
-    [challengeContract]);
+    [challengeContract]
+  );
 
   const handleFormSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    console.log("handleFormSubmit");
+    // let randomNumber = e.target.elements.randomNumber?.value;
 
-    let randomNumber = e.target.elements.randomNumber?.value;
+    let randomNumber =
+      "78132174293962556042415964879295911854525104036601504842377697224105090136534";
+    console.log("randomNumber", randomNumber);
 
     callToValidateChallenge({ randomNumber });
   };
   return (
     <div className="h-24 flex flex-col items-center justify-center">
-        <form onSubmit={handleFormSubmit} className="flex flex-col items-center justify-center">
-        <div
-            className={`w-96 mb-4 border transition duration-150 ease-in-out focus-within:border-primary border-gray-500`}
+      <form
+        onSubmit={() => handleFormSubmit}
+        className="flex flex-col items-center justify-center"
       >
-            <label
-                htmlFor="validate"
-                className={`text-xs text-primary font-light placeholder-gray-gray4 px-2 pt-1.5`}
-                >
-                Random Number
-            </label>
-            <input
-                type="text"
-                className={`w-full px-2 pb-1.5 text-primary outline-none text-base font-light rounded-md`}
-                id="randomNumber"
-                placeholder={"28933480438792750..."}
-            />
-          </div>
-          <button type="button" className="shadow bg-yellow hover:bg-yellow-400 focus:shadow-outline focus:outline-none text-black-300 font-bold py-2 px-4 mx-auto rounded">SUBMIT</button>
-        </form>
+        <div
+          className={`w-96 mb-4 border transition duration-150 ease-in-out focus-within:border-primary border-gray-500`}
+        >
+          <label
+            htmlFor="validate"
+            className={`text-xs text-primary font-light placeholder-gray-gray4 px-2 pt-1.5`}
+          >
+            Random Number
+          </label>
+          <input
+            type="text"
+            className={`w-full px-2 pb-1.5 text-primary outline-none text-base font-light rounded-md`}
+            id="randomNumber"
+            placeholder={"28933480438792750..."}
+          />
+        </div>
+        <button
+          type="button"
+          onClick={handleFormSubmit}
+          className="shadow bg-yellow hover:bg-yellow-400 focus:shadow-outline focus:outline-none text-black-300 font-bold py-2 px-4 mx-auto rounded"
+        >
+          SUBMIT
+        </button>
+      </form>
     </div>
-  )
+  );
 };
 
 export default ValidateChallenge;

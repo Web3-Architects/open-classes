@@ -13,28 +13,40 @@ import { addresses, abis } from "@project/contracts";
 import Header from "./components/Header";
 import useWeb3Modal from "./hooks/useWeb3Modal";
 
-async function readOnChainData() {
-  // Should replace with the end-user wallet, e.g. Metamask
-  // A Web3Provider wraps a standard Web3 provider, which is
-  // what Metamask injects as window.ethereum into each page
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-
-  // Create an instance of an ethers.js Contract
-  // Read more about ethers.js on https://docs.ethers.io/v5/api/contract/contract/
-  console.log("abi", abis.randomNumberConsumer);
-  const RandomNumberConsumer = new Contract(
-    addresses.rinkeby,
-    abis.randomNumberConsumer.abi,
-    provider
-  );
-
-  const address = RandomNumberConsumer.address;
-  console.log({ address: address.toString() });
-}
-
 function App() {
   const { address } = useWeb3Modal();
+
+  async function readOnChainData() {
+    // Should replace with the end-user wallet, e.g. Metamask
+    // A Web3Provider wraps a standard Web3 provider, which is
+    // what Metamask injects as window.ethereum into each page
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // const signer = provider.getSigner();
+
+    // Create an instance of an ethers.js Contract
+    // Read more about ethers.js on https://docs.ethers.io/v5/api/contract/contract/
+    console.log("abi", abis.randomNumberConsumer);
+    const RandomNumberConsumer = new Contract(
+      addresses.rinkeby,
+      abis.randomNumberConsumer.abi,
+      provider
+    );
+
+    // const contract = ethers.getContract(
+    //   addresses.rinkeby,
+    //   abis.randomNumberConsumer.abi,
+    //   provider
+    // );
+    const signer = RandomNumberConsumer.connect(provider.getSigner());
+    signer.requestRandom(address);
+
+    // const request = await RandomNumberConsumer.
+    // return Promise(request);
+
+    // const address = RandomNumberConsumer.address;
+    // console.log({ address: address.toString() });
+  }
+
   console.log("address App", address);
   return (
     <Router>
