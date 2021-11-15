@@ -1,35 +1,45 @@
-import { useEffect } from 'react';
-import { ThreeIdConnect, EthereumAuthProvider } from '@3id/connect';
-import CeramicClient from '@ceramicnetwork/http-client';
-import ThreeIdResolver from '@ceramicnetwork/3id-did-resolver';
-import { IDX } from '@ceramicstudio/idx';
-import { DID } from 'dids';
+import { useEffect } from "react";
+import { ThreeIdConnect, EthereumAuthProvider } from "@3id/connect";
+import CeramicClient from "@ceramicnetwork/http-client";
+import ThreeIdResolver from "@ceramicnetwork/3id-did-resolver";
+import { DID } from "dids";
+// import { IDX } from '@ceramicstudio/idx';
 
-const ceramicProvider = CeramicClient.default ? CeramicClient.default : CeramicClient;
-// const threeIdProvider = ThreeIdResolver.default ? ThreeIdResolver.default : ThreeIdResolver;
+const ceramicProvider = CeramicClient.default
+  ? CeramicClient.default
+  : CeramicClient;
+// const threeIdProvider = ThreeIdResolver.default
+//   ? ThreeIdResolver.default
+//   : ThreeIdResolver;
 
+const ceramic = new ceramicProvider("https://ceramic-clay.3boxlabs.com");
+
+const resolver = ThreeIdResolver.getResolver(ceramic);
+const did = new DID({ resolver });
+
+ceramic.did = did;
 
 const use3ID = () => {
-
   const requestAddress = async () => {
     const addresses = await window.ethereum.enable();
     const threeIdConnect = new ThreeIdConnect();
-    const authProvider = new EthereumAuthProvider(window.ethereum, addresses[0]);
+    const authProvider = new EthereumAuthProvider(
+      window.ethereum,
+      addresses[0]
+    );
     await threeIdConnect.connect(authProvider);
     const provider = await threeIdConnect.getDidProvider();
 
-    const ceramic = new ceramicProvider("https://ceramic-clay.3boxlabs.com");
-
     ceramic.did.setProvider(provider);
 
-   const auth = await ceramic.did.authenticate()
+    const auth = await ceramic.did.authenticate();
 
-    console.log('auth', auth);
-  }
-  
+    console.log("auth", auth);
+  };
+
   useEffect(() => {
     requestAddress();
-  }, [])
-}
+  }, []);
+};
 
 export default use3ID;

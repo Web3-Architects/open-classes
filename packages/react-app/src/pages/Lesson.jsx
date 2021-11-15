@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
 import ValidateChallenge from "../components/ValidateChallenge";
+import use3ID from "../hooks/use3ID";
 
 const codeExample = `const { providers } = require('ethers');
 
@@ -12,6 +13,8 @@ export default function Example() {
   useEffect(() => {
     Prism.highlightAll();
   }, []);
+
+  use3ID();
   return (
     <>
       {/* Background color split screen for large screens */}
@@ -30,11 +33,13 @@ export default function Example() {
                       Querying events with ethers.js
                     </p>
                     <p className="text-xl mb-4">
-                      If a smart contract emits an event with one or several indexed arguments, it's possible to filter logs to
-                      retrieve events that only match these arguments. Here's how to do it with ethers.
+                      If a smart contract emits an event with one or several
+                      indexed arguments, it's possible to filter logs to
+                      retrieve events that only match these arguments. Here's
+                      how to do it with ethers.
                     </p>
                     <p className="text-xl mb-4">
-                     We first create an EventFilter:
+                      We first create an EventFilter:
                     </p>
                     <pre>
                       <code class="language-javascript">
@@ -48,11 +53,16 @@ export default function Example() {
                     </pre>
 
                     <p className="text-xl mb-4">
-                      In it, we specify the target contract's address and the range of blocks to query,
-                      often we want to query up to the latest block but I recommend adjusting the fromBlock
-                      value. For example, it can be a few blocks before the one that included the contract creation.
-                      <br/><br/>But where do <i>topics</i> come from? Ethers provides a convenient way to match the topics we want.
-                      Here's an example, for a standard ERC-20 Transfer event:
+                      In it, we specify the target contract's address and the
+                      range of blocks to query, often we want to query up to the
+                      latest block but I recommend adjusting the fromBlock
+                      value. For example, it can be a few blocks before the one
+                      that included the contract creation.
+                      <br />
+                      <br />
+                      But where do <i>topics</i> come from? Ethers provides a
+                      convenient way to match the topics we want. Here's an
+                      example, for a standard ERC-20 Transfer event:
                     </p>
                     <pre>
                       <code class="language-javascript">
@@ -61,11 +71,19 @@ const topics = contract.filters.Transfer(myAddress, otherAddress)?.topics;`}
                       </code>
                     </pre>
                     <p className="text-xl mb-4">
-                      For more examples and an explanation about what topics are, please visit <u><a href="https://docs.ethers.io/v5/concepts/events/#events--filters">this section of ethers' docs</a></u>
-                      <br/><br/>
-                      By passing our event filter we can now get the logs we're looking for:
+                      For more examples and an explanation about what topics
+                      are, please visit{" "}
+                      <u>
+                        <a href="https://docs.ethers.io/v5/concepts/events/#events--filters">
+                          this section of ethers' docs
+                        </a>
+                      </u>
+                      <br />
+                      <br />
+                      By passing our event filter we can now get the logs we're
+                      looking for:
                     </p>
-                     <pre>
+                    <pre>
                       <code class="language-javascript">
                         {`let logs;
  try {
@@ -75,13 +93,14 @@ const topics = contract.filters.Transfer(myAddress, otherAddress)?.topics;`}
   }`}
                       </code>
                     </pre>
-                    <br/>
+                    <br />
                     <p className="text-xl mb-4">
-                      Now, if we want to get the values of the input parameters of the events,
-                      we need to parse these logs. For that, we can use <i>interface.parseLogs</i>,
-                      a method available on a contract interface.
+                      Now, if we want to get the values of the input parameters
+                      of the events, we need to parse these logs. For that, we
+                      can use <i>interface.parseLogs</i>, a method available on
+                      a contract interface.
                     </p>
-                     <pre>
+                    <pre>
                       <code class="language-javascript">
                         {`// Instantiate the contract interface from its abi
 const Interface = new ethers.utils.Interface(abi);
@@ -93,29 +112,43 @@ parsedLogs.forEach(parsedLog => console.log(parsedLog));`}
                       </code>
                     </pre>
                     <p className="text-xl mb-4">
-                    Finally you should see the values emitted with the events in the <i>args</i> property of a parsed log!
+                      Finally you should see the values emitted with the events
+                      in the <i>args</i> property of a parsed log!
                     </p>
-                     <p className="text-xl font-bold mb-10">
-                      Challenge
+                    <p className="text-xl font-bold mb-10">Challenge</p>
+                    <p className="text-xl mb-4">
+                      We already deployed a smart contract that will emit an
+                      event with a random number and the ethereum address you
+                      are connected with. This event has the following
+                      signature, where <i>to</i> is your address:
                     </p>
-                    <p className="text-xl mb-4">We already deployed a smart contract that will emit an event with a random number and the ethereum address you
-                      are connected with. This event has the following signature, where <i>to</i> is your address:
-                    </p>
-                     <pre>
+                    <pre>
                       <code class="language-javascript">
                         {`event RandomNumberReceived(address indexed to, uint256 indexed randomNumber);`}
                       </code>
                     </pre>
                     <p className="text-xl mb-4">
-                      The goal for you is to find out what that random number is! And for that, you will have to retrieve the events from that contract, filtered by your address. 
+                      The goal for you is to find out what that random number
+                      is! And for that, you will have to retrieve the events
+                      from that contract, filtered by your address.
                     </p>
-                      <ol className="list-decimal mx-4">
-                        <li>Make sure you are connected with an Ethereum account which has some Rinkeby ETH</li>
-                        <li>Click on "Emit event"</li>
-                        <li>Confirm the transaction</li>
-                        <li>Complete the code in the CodeSandbox to the right to print the value of the random number in the sandbox's console</li>
-                        <li>Finally, submit the number and confirm the transaction to validate this challenge and get your credentials!</li>
-                      </ol>
+                    <ol className="list-decimal mx-4">
+                      <li>
+                        Make sure you are connected with an Ethereum account
+                        which has some Rinkeby ETH
+                      </li>
+                      <li>Click on "Emit event"</li>
+                      <li>Confirm the transaction</li>
+                      <li>
+                        Complete the code in the CodeSandbox to the right to
+                        print the value of the random number in the sandbox's
+                        console
+                      </li>
+                      <li>
+                        Finally, submit the number and confirm the transaction
+                        to validate this challenge and get your credentials!
+                      </li>
+                    </ol>
                   </div>
                 </div>
                 {/* End left column area */}
@@ -125,7 +158,10 @@ parsedLogs.forEach(parsedLog => console.log(parsedLog));`}
             <div className="bg-white lg:min-w-0 lg:flex-1">
               <div className="h-full py-6 px-4 sm:px-6 lg:px-8">
                 {/* Start main area*/}
-                <div className="relative h-full flex flex-col" style={{ minHeight: "36rem" }}>
+                <div
+                  className="relative h-full flex flex-col"
+                  style={{ minHeight: "36rem" }}
+                >
                   <div className="inset-0 border-2 border-gray-200 border-dashed rounded-lg h-full">
                     <iframe
                       src="https://codesandbox.io/embed/ethers-events-query-forked-ixsmu?fontsize=14&hidenavigation=1&theme=dark"
