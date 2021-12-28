@@ -1718,13 +1718,10 @@
   dependencies:
     rxjs "^6.6.6"
 
-"@chainlink/contracts@^0.1.9":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@chainlink/contracts/-/contracts-0.1.9.tgz#b2e77b87d7eea737cd668c4c727660e7b55cd236"
-  integrity sha512-7UIqkdzarbK876YZAiGKeYj/ujG3FPVVxWLACxbdyacM+ryIAgcZMkaaavt5+NwVXJvVjwWmucWTDCTy0JP8ag==
-  optionalDependencies:
-    "@truffle/contract" "^4.3.8"
-    ethers "^4.0.45"
+"@chainlink/contracts@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@chainlink/contracts/-/contracts-0.3.0.tgz#b388615acab5d9353bc15b5357250cf0662bc8fe"
+  integrity sha512-Pxu5qMTa0gc28Sxf9hyBkvwhPMn3HD62cGXy54RkL9PcabOHlUsk1i3BoFf3rwFr7T30N/obYn4de3ZrG12PDA==
 
 "@chainlink/test-helpers@0.0.5":
   version "0.0.5"
@@ -3676,7 +3673,7 @@
     ajv "^6.10.0"
     debug "^4.3.1"
 
-"@truffle/contract@^4.1.8", "@truffle/contract@^4.3.8":
+"@truffle/contract@^4.1.8":
   version "4.3.40"
   resolved "https://registry.yarnpkg.com/@truffle/contract/-/contract-4.3.40.tgz#5c3fcda951d806fd753aad3198786b44ee6873af"
   integrity sha512-VRO1CrNT+pdsjWBu/F8dZw3pAdJrpSx9hogBkiJOvikrz3ZEQOYA9cAMC4Pl+677Q5Qd+4DSxEtB1ufjpSThIg==
