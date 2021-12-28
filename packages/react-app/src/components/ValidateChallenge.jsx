@@ -13,7 +13,7 @@ const ValidateChallenge = () => {
   useEffect(() => {
     const contract = new ethers.Contract(
       CHALLENGE_CONTRACT_ADDRESS,
-      [abis.randomNumberConsumer],
+      abis.randomNumberConsumer.abi,
       provider
     );
     setChallengeContract(contract);
