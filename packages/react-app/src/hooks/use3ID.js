@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { ThreeIdConnect, EthereumAuthProvider } from "@3id/connect";
 import CeramicClient from "@ceramicnetwork/http-client";
 import ThreeIdResolver from "@ceramicnetwork/3id-did-resolver";
@@ -20,7 +20,8 @@ const did = new DID({ resolver });
 ceramic.did = did;
 
 const use3ID = () => {
-  const requestAddress = async () => {
+  const [DID, setDID] = useState(null);
+  const authenticate = async () => {
     const addresses = await window.ethereum.enable();
     const threeIdConnect = new ThreeIdConnect();
     const authProvider = new EthereumAuthProvider(
@@ -30,16 +31,16 @@ const use3ID = () => {
     await threeIdConnect.connect(authProvider);
     const provider = await threeIdConnect.getDidProvider();
 
-    ceramic.did.setProvider(provider);
+    if (!ceramic.did.authenticated) {
+      ceramic.did.setProvider(provider);
+      const auth = await ceramic.did.authenticate();
 
-    const auth = await ceramic.did.authenticate();
-
-    console.log("auth", auth);
+      console.log("authenticated with 3ID: ", auth);
+      setDID(ceramic.did.id);
+    }
   };
 
-  useEffect(() => {
-    requestAddress();
-  }, []);
+  return { authenticate, DID };
 };
 
 export default use3ID;
