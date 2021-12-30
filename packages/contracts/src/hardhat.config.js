@@ -44,14 +44,14 @@ module.exports = {
       // }
     },
     localhost: {},
-    kovan: {
-      url: KOVAN_RPC_URL,
-      accounts: [PRIVATE_KEY],
-      //   accounts: {
-      //     mnemonic: MNEMONIC,
-      //   },
-      saveDeployments: true,
-    },
+    // kovan: {
+    //   url: KOVAN_RPC_URL,
+    //   accounts: [PRIVATE_KEY],
+    //   //   accounts: {
+    //   //     mnemonic: MNEMONIC,
+    //   //   },
+    //   saveDeployments: true,
+    // },
     rinkeby: {
       url: RINKEBY_RPC_URL,
       // accounts: [PRIVATE_KEY],
