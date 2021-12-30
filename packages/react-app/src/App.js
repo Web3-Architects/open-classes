@@ -39,7 +39,7 @@ function App() {
   return (
     <Router>
       <div>
-        <button onClick={() => readOnChainData()}>Read On-Chain Balance</button>
+        {/* <button onClick={() => readOnChainData()}>Read On-Chain Balance</button> */}
 
         <Header />
 
