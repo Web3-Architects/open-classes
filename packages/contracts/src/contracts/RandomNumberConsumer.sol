@@ -15,6 +15,7 @@ contract RandomNumberConsumer is VRFConsumerBase {
     
     IOpenCredentials public openCredentials; 
     string public constant lessonName = "Querying events with ethers";
+    bytes32 public constant credentialId = keccak256(abi.encodePacked(lessonName));
 
     event RandomNumberRequested(bytes32 indexed requestId, address indexed user);
     event RandomNumberReceived(address indexed to, uint256 indexed randomNumber);
@@ -53,13 +54,10 @@ contract RandomNumberConsumer is VRFConsumerBase {
     {
         keyHash = _keyHash;
         fee = _fee;
-        openCredentials = IOpenCredentials(0xCbAd576D57457dBD17888cE4e73b4A173479B46D);
+        openCredentials = IOpenCredentials(0x27187729F39de1bEB68e9Aa4E3D52240DD409730);
         owner = msg.sender;
     }
 
-    // function hashSeriesNumber(string calldata series, uint256 number) external pure returns (bytes32) {
-    //     return keccak256(abi.encode(number, series));
-    // }
 
     function requestRandom(address user) public returns (bytes32 requestId) {
         require(LINK.balanceOf(address(this)) >= fee, "Not enough LINK to pay fee");
@@ -89,12 +87,6 @@ contract RandomNumberConsumer is VRFConsumerBase {
         openCredentials = IOpenCredentials(newAddress);
     }
 
-    /**
-     * Withdraw LINK from this contract
-     *
-     * DO NOT USE THIS IN PRODUCTION AS IT CAN BE CALLED BY ANY ADDRESS.
-     * THIS IS PURELY FOR EXAMPLE PURPOSES.
-     */
     function withdrawLink() external {
         require(msg.sender == owner);
         require(LINK.transfer(msg.sender, LINK.balanceOf(address(this))), "Unable to transfer");

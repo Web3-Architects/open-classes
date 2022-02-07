@@ -3,12 +3,11 @@ import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { navigation } from "../mocks/home";
 import "./Header.css";
-import logo from "../assets/logo.png";
-import MetamaskButton from "./MetamaskButton";
 import WalletButton from "./WalletButton";
+import DIDButton from "./DIDButton";
 import useWeb3Modal from "../hooks/useWeb3Modal";
 
-const Header = () => {
+const Header = ({ authenticate, DID }) => {
   const { provider, loadWeb3Modal, logoutOfWeb3Modal } = useWeb3Modal();
   return (
     <Popover as="header" className="relative bg-yellow text-black font-bold">
@@ -63,6 +62,7 @@ const Header = () => {
                   loadWeb3Modal={loadWeb3Modal}
                   logoutOfWeb3Modal={logoutOfWeb3Modal}
                 />
+                <DIDButton authenticate={authenticate} DID={DID} />
                 <a
                   href="#"
                   className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-black hover:bg-black"

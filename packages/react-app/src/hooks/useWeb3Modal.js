@@ -13,6 +13,7 @@ const NETWORK_NAME = "mainnet";
 function useWeb3Modal(config = {}) {
   const [provider, setProvider] = useState();
   const [address, setAddress] = useState();
+  const [signer, setSigner] = useState();
   const [network, setNetwork] = useState();
   const [autoLoaded, setAutoLoaded] = useState(false);
   const {
@@ -45,6 +46,7 @@ function useWeb3Modal(config = {}) {
     const signer = web3Provider.getSigner();
     const address = await signer.getAddress();
     setAddress(address);
+    setSigner(signer);
 
     const network = await web3Provider.getNetwork();
     setNetwork(network);
@@ -73,7 +75,14 @@ function useWeb3Modal(config = {}) {
     setAutoLoaded,
     web3Modal.cachedProvider,
   ]);
-  return { provider, loadWeb3Modal, logoutOfWeb3Modal, address, network };
+  return {
+    provider,
+    loadWeb3Modal,
+    logoutOfWeb3Modal,
+    address,
+    signer,
+    network,
+  };
 }
 
 export default useWeb3Modal;

@@ -1,7 +1,6 @@
-// This address points to a dummy ERC20 contract deployed on Ethereum Mainnet,
-// Goerli, Kovan, Rinkeby and Ropsten. Replace it with your smart contracts.
+// This address points to RandomNumberConsumer on Rinkeby
 const addresses = {
-  rinkeby: "0x123fAf4B7af7c5C35790BBCA05F6135E6AdBE578",
+  rinkeby: "0xb25873E1fd210EF76D4528F04d1142434efbA8bc",
 };
 
 export default addresses;

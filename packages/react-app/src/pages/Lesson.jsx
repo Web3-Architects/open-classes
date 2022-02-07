@@ -2,19 +2,12 @@ import { useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
 import ValidateChallenge from "../components/ValidateChallenge";
-import use3ID from "../hooks/use3ID";
 
-const codeExample = `const { providers } = require('ethers');
-
-const provider = new providers.Web3Provider(ganacheProvider);
-`;
-
-export default function Example() {
+export default function Example({ DID }) {
   useEffect(() => {
     Prism.highlightAll();
   }, []);
 
-  use3ID();
   return (
     <>
       {/* Background color split screen for large screens */}
@@ -97,8 +90,8 @@ const topics = contract.filters.Transfer(myAddress, otherAddress)?.topics;`}
                     <p className="text-xl mb-4">
                       Now, if we want to get the values of the input parameters
                       of the events, we need to parse these logs. For that, we
-                      can use <i>interface.parseLogs</i>, a method available on
-                      a contract interface.
+                      can use <i>interface.parseLog</i>, a method available on a
+                      contract interface.
                     </p>
                     <pre>
                       <code class="language-javascript">
@@ -179,7 +172,7 @@ parsedLogs.forEach(parsedLog => console.log(parsedLog));`}
                     ></iframe>
                   </div>
                   <div className="inset-0 border-2 border-gray-200 border-dashed rounded-lg p-4">
-                    <ValidateChallenge />
+                    <ValidateChallenge DID={DID} />
                   </div>
                 </div>
                 {/* End main area */}
