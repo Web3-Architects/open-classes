@@ -1,8 +1,6 @@
 import React from "react";
 import { ethers } from "ethers";
 import { Contract } from "@ethersproject/contracts";
-import { getDefaultProvider } from "@ethersproject/providers";
-import { useQuery } from "@apollo/react-hooks";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -12,6 +10,7 @@ import Lesson from "./pages/Lesson";
 import { addresses, abis } from "@project/contracts";
 import Header from "./components/Header";
 import useWeb3Modal from "./hooks/useWeb3Modal";
+import use3ID from "./hooks/use3ID";
 
 async function readOnChainData() {
   // Should replace with the end-user wallet, e.g. Metamask
@@ -36,12 +35,13 @@ async function readOnChainData() {
 function App() {
   const { address } = useWeb3Modal();
   console.log("address App", address);
+  const { authenticate, DID } = use3ID();
   return (
     <Router>
       <div>
         {/* <button onClick={() => readOnChainData()}>Read On-Chain Balance</button> */}
 
-        <Header />
+        <Header authenticate={authenticate} DID={DID} />
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -50,7 +50,7 @@ function App() {
             <About />
           </Route>
           <Route path="/lesson">
-            <Lesson />
+            <Lesson DID={DID} />
           </Route>
           <Route path="/">
             <Home />

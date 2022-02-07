@@ -1,19 +1,19 @@
 import { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
-import { abis } from "@project/contracts";
+import { addresses, abis } from "@project/contracts";
 
 import useWeb3Modal from "../hooks/useWeb3Modal";
 
-const CHALLENGE_CONTRACT_ADDRESS = "0x34BaB47Ce1ce166C20cC19a3Db98dc16518E13da";
+const CHALLENGE_CONTRACT_ADDRESS_RINKEBY = addresses.rinkeby;
 
-const ValidateChallenge = () => {
+const ValidateChallenge = ({ DID }) => {
   const { address, signer } = useWeb3Modal();
   const [challengeContract, setChallengeContract] = useState(null);
 
   useEffect(() => {
     if (!signer) return;
     const contract = new ethers.Contract(
-      CHALLENGE_CONTRACT_ADDRESS,
+      CHALLENGE_CONTRACT_ADDRESS_RINKEBY,
       abis.randomNumberConsumer.abi,
       signer
     );
@@ -22,23 +22,36 @@ const ValidateChallenge = () => {
 
   const callToValidateChallenge = useCallback(
     async ({ randomNumber }) => {
-      // TODO: pass DID subject generated from 3ID Connect
-      const DIDSubject = "did:subject";
-      await challengeContract.validateChallenge(randomNumber, DIDSubject);
+      console.log("in validate");
+      await challengeContract.validateChallenge(randomNumber, DID);
     },
-    [challengeContract]
+    [challengeContract, DID]
   );
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const handleFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
 
-    let randomNumber = e.target.elements.randomNumber?.value;
-
-    callToValidateChallenge({ randomNumber });
-  };
+      let randomNumber = e.target.elements.randomNumber?.value;
+      if (!challengeContract) {
+        console.error("Error: contract is not instantiated");
+      }
+      console.log(`DID`, DID);
+      if (DID) {
+        callToValidateChallenge({ randomNumber });
+      } else {
+        alert("Please login with 3ID");
+      }
+    },
+    [DID, callToValidateChallenge, challengeContract]
+  );
 
   const callToEmitEvent = useCallback(async () => {
-    if (!signer || !challengeContract || !address) {
+    if (!challengeContract) {
+      console.error("Error: contract is not instantiated");
+      return;
+    }
+    if (!signer || !address) {
       alert("You must be connected with your wallet first");
     }
     await challengeContract.requestRandom(address);
@@ -74,7 +87,7 @@ const ValidateChallenge = () => {
           />
         </div>
         <button
-          type="button"
+          type="submit"
           className="shadow bg-yellow hover:bg-yellow-400 focus:shadow-outline focus:outline-none text-black-300 font-bold py-2 px-4 mx-auto rounded"
         >
           SUBMIT

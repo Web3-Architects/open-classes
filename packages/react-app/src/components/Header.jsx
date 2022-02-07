@@ -3,16 +3,12 @@ import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { navigation } from "../mocks/home";
 import "./Header.css";
-import logo from "../assets/logo.png";
-import MetamaskButton from "./MetamaskButton";
 import WalletButton from "./WalletButton";
 import DIDButton from "./DIDButton";
 import useWeb3Modal from "../hooks/useWeb3Modal";
-import use3ID from "../hooks/use3ID";
 
-const Header = () => {
+const Header = ({ authenticate, DID }) => {
   const { provider, loadWeb3Modal, logoutOfWeb3Modal } = useWeb3Modal();
-  const { authenticate, DID } = use3ID();
   return (
     <Popover as="header" className="relative bg-yellow text-black font-bold">
       {({ open }) => (
