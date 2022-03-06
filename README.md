@@ -1,3 +1,9 @@
+# Open_Classes
+
+For context and a full overview of the project, please read this blog post first: https://blog.raphaelroullet.com/hybrid-crypto-credentials-decentralized-learning/
+
+Related repository: https://github.com/Web3-Architects/open-cred
+
 This project was bootstrapped with [Create Eth App](https://github.com/paulrberg/create-eth-app).
 
 ## Project Structure
